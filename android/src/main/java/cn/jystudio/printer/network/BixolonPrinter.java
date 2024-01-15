@@ -56,6 +56,7 @@ public class BixolonPrinter {
             String fontType = text.getString("fontType");
             String x = text.getString("x");
             String y = text.getString("y");
+            boolean pageBreak = text.hasKey("pageBreak") ? text.getBoolean("pageBreak"): false;
             //String fieldBlock = text.hasKey("fieldBlock") ? text.getString("fieldBlock") : "";
             String fontMultiplier = text.hasKey("fontMultiplier") ? text.getString("fontMultiplier"): "1,1";
             try {
@@ -74,6 +75,10 @@ public class BixolonPrinter {
             //     bixolon.addText(x,y,fontType,fontMultiplier,t,fontEncoding);
             // }
             bixolon.addText(x,y,fontType,fontMultiplier,t,fontEncoding);
+            if(pageBreak){
+                bixolon.addEndCommand(fontEncoding);
+            };
+            
         }
         bixolon.addEndCommand(fontEncoding);
         Vector<Byte> bytes = bixolon.getCommand();
